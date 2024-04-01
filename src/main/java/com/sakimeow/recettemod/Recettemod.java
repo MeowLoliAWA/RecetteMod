@@ -1,14 +1,10 @@
 package com.sakimeow.recettemod;
 
 import com.mojang.logging.LogUtils;
+import com.sakimeow.recettemod.registry.RecetteItems;
 import net.minecraft.client.Minecraft;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.CreativeModeTabEvent;
@@ -19,10 +15,10 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
+
+import static com.sakimeow.recettemod.registry.RecetteItems.*;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(Recettemod.MODID)
@@ -46,6 +42,9 @@ public class Recettemod
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
+
+        RecetteItems.ITEMS.register(modEventBus);
+        modEventBus.addListener(this::addCreative);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)
@@ -57,6 +56,17 @@ public class Recettemod
 
     private void addCreative(CreativeModeTabEvent.BuildContents event)
     {
+//        if (event.getTab() == RecetteTab.RECETTE_TAB){
+//            event.accept(SWEET.get());
+//            event.accept(MACARONE.get());
+//        }
+
+        if (event.getTab() == CreativeModeTabs.COMBAT)
+            event.accept(SWEET_SWORD);
+        if (event.getTab() == CreativeModeTabs.FOOD_AND_DRINKS)
+            event.accept(MACARONE);
+        if (event.getTab() == CreativeModeTabs.FOOD_AND_DRINKS)
+            event.accept(SWEET);
 
     }
 
