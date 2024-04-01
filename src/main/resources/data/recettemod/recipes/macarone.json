@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "minecraft:sugar"
+    },
+    "X": {
+      "item": "minecraft:wheat"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "X#X",
+    "X#X"
+  ],
+  "result": {
+    "item": "recettemod:macarone"
+  }
+}
